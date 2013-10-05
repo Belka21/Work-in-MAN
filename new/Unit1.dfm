@@ -1,6 +1,6 @@
 object Form1: TForm1
-  Left = 270
-  Top = 151
+  Left = 757
+  Top = 406
   Width = 928
   Height = 480
   Caption = 'Form1'
@@ -11,19 +11,20 @@ object Form1: TForm1
   Font.Name = 'MS Sans Serif'
   Font.Style = []
   OldCreateOrder = False
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object Label1: TLabel
     Left = 328
     Top = 232
-    Width = 121
-    Height = 25
+    Width = 39
+    Height = 13
     Caption = '             '
   end
   object Label2: TLabel
     Left = 144
     Top = 128
-    Width = 57
+    Width = 32
     Height = 13
     Caption = 'Label2'
   end

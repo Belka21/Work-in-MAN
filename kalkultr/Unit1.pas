@@ -49,6 +49,9 @@ type
     procedure Button18Click(Sender: TObject);
     procedure Button19Click(Sender: TObject);
     procedure Button20Click(Sender: TObject);
+    procedure Edit1KeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -58,12 +61,20 @@ type
 var
   Form1: TForm1;
   x,y,k:real;
+  i:Byte;
   c:char;
   s,b:string;
 
 implementation
 
 {$R *.dfm}
+
+procedure chistilka;
+begin
+ s:=Form1.Edit1.Text;
+ if s[1]='/' then begin Delete(s,1,1); Form1.Edit1.Text:=s; end;
+
+end;
 
 procedure TForm1.Button1Click(Sender: TObject);
  begin
@@ -117,12 +128,13 @@ procedure TForm1.Button7Click(Sender: TObject);
 
 procedure TForm1.Button11Click(Sender: TObject);
  begin
+   i:=0;
   if Edit1.Text='' then ShowMessage('введите число')
   else
    begin
-  x:=StrToFloat(Edit1.Text);
-  Edit1.Text:='';
-  c:='/';
+   x:=StrToFloat(Edit1.Text);
+   Edit1.Text:='';
+   c:='/';
    end;
  end;
 
@@ -131,6 +143,7 @@ procedure TForm1.Button15Click(Sender: TObject);
   if Edit1.Text='' then ShowMessage('введите число')
   else
    begin
+     chistilka;
     y:=StrToFloat(Edit1.Text);
     case c of
     '/':if y=0 then ShowMessage('на 0 делить нельзя!') else k:=x/y;
@@ -144,6 +157,7 @@ procedure TForm1.Button15Click(Sender: TObject);
 
 procedure TForm1.Button12Click(Sender: TObject);
  begin
+   i:=0;
    if Edit1.Text='' then ShowMessage('введите число')
    else
     begin
@@ -155,6 +169,7 @@ procedure TForm1.Button12Click(Sender: TObject);
 
 procedure TForm1.Button13Click(Sender: TObject);
  begin
+   i:=0;
    if Edit1.Text='' then ShowMessage('введите число')
    else
     begin
@@ -166,28 +181,31 @@ procedure TForm1.Button13Click(Sender: TObject);
 
 procedure TForm1.Button14Click(Sender: TObject);
  begin
+   i:=0;
   if Edit1.Text='' then ShowMessage('введите число')
   else
    begin
-  x:=StrToFloat(Edit1.Text);
-  Edit1.Text:='';
+   x:=StrToFloat(Edit1.Text);
+   Edit1.Text:='';
   c:='+';
    end;
  end;
 
 procedure TForm1.Button16Click(Sender: TObject);
  begin
+  i:=0;
   x:=StrToFloat(Edit1.Text);
   if x<0 then ShowMessage('число отрицательное')
   else
    begin
-  k:=sqrt(x);
-  Edit1.Text:=FloatToStr(k);
+   k:=sqrt(x);
+   Edit1.Text:=FloatToStr(k);
    end;
  end;
 
 procedure TForm1.Button17Click(Sender: TObject);
  begin
+  i:=0;
   Edit1.Text:='';
   x:=0;
   y:=0;
@@ -212,7 +230,9 @@ procedure TForm1.Button18Click(Sender: TObject);
 
 procedure TForm1.Button19Click(Sender: TObject);
 begin
-Edit1.Text:=Edit1.Text+',';
+ if i<1 then
+ Edit1.Text:=Edit1.Text+',';
+  i:=i+1;
 end;
 
 procedure TForm1.Button20Click(Sender: TObject);
@@ -220,6 +240,35 @@ begin
 s:=Edit1.Text;
 Delete(s,length(s),1);
 Edit1.Text:=s;
+end;
+
+procedure TForm1.Edit1KeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+ case Key of
+  VK_ADD:begin x:=StrToFloat(Edit1.Text); c:='+'; Edit1.Text:='';   end;
+  VK_DIVIDE:begin x:=StrToFloat(Edit1.Text); c:='/'; Edit1.Text:='';  end;
+  VK_SUBTRACT:begin x:=StrToFloat(Edit1.Text); c:='-'; Edit1.Text:='';  end;
+  VK_RETURN:if Edit1.Text='' then ShowMessage('введите число')
+  else
+   begin
+     chistilka;
+    y:=StrToFloat(Edit1.Text);
+    case c of
+    '/':if y=0 then ShowMessage('на 0 делить нельзя!') else k:=x/y;
+    '*':begin k:=x*y;   end;
+    '-':begin k:=x-y;   end;
+    '+':begin k:=x+y;   end;
+    end;
+    Edit1.Text:=FloatToStr(k)
+   end;
+ end;
+
+end;
+
+procedure TForm1.FormCreate(Sender: TObject);
+begin
+i:=0;
 end;
 
 end.

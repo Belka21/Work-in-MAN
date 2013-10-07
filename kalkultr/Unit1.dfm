@@ -11,14 +11,16 @@ object Form1: TForm1
   Font.Name = 'MS Sans Serif'
   Font.Style = []
   OldCreateOrder = False
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object Edit1: TEdit
     Left = 160
     Top = 96
     Width = 193
-    Height = 33
+    Height = 21
     TabOrder = 0
+    OnKeyDown = Edit1KeyDown
   end
   object Button1: TButton
     Left = 160

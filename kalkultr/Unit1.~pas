@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, Menus,Unit2;
+  Dialogs, StdCtrls;
 
 type
   TForm1 = class(TForm)
@@ -29,9 +29,6 @@ type
     Button18: TButton;
     Button19: TButton;
     Button20: TButton;
-    MainMenu1: TMainMenu;
-    N1: TMenuItem;
-    N2: TMenuItem;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
@@ -52,16 +49,14 @@ type
     procedure Button18Click(Sender: TObject);
     procedure Button19Click(Sender: TObject);
     procedure Button20Click(Sender: TObject);
-
-    procedure FormCreate(Sender: TObject);
-    procedure FormKeyDown(Sender: TObject; var Key: Word;
+    procedure Edit1KeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
     { Public declarations }
   end;
-
 
 var
   Form1: TForm1;
@@ -77,7 +72,7 @@ implementation
 procedure chistilka;
 begin
  s:=Form1.Edit1.Text;
- if (s[1]='/') or (s[1]='*') then begin Delete(s,1,1); Form1.Edit1.Text:=s; end;
+ if s[1]='/' then begin Delete(s,1,1); Form1.Edit1.Text:=s; end;
 
 end;
 
@@ -151,10 +146,10 @@ procedure TForm1.Button15Click(Sender: TObject);
      chistilka;
     y:=StrToFloat(Edit1.Text);
     case c of
-    '/':if k:=del(x,y);
-    '*':begin chistilka; k:=mno(x,y);   end;
-    '-':begin k:=minus(x,y);   end;
-    '+':begin k:=plus(x,y);   end;
+    '/':if y=0 then ShowMessage('на 0 делить нельзя!') else k:=x/y;
+    '*':begin k:=x*y;   end;
+    '-':begin k:=x-y;   end;
+    '+':begin k:=x+y;   end;
     end;
     Edit1.Text:=FloatToStr(k)
    end;
@@ -203,7 +198,7 @@ procedure TForm1.Button16Click(Sender: TObject);
   if x<0 then ShowMessage('число отрицательное')
   else
    begin
-   k:=kor(x);
+   k:=sqrt(x);
    Edit1.Text:=FloatToStr(k);
    end;
  end;
@@ -247,7 +242,7 @@ Delete(s,length(s),1);
 Edit1.Text:=s;
 end;
 
-{procedure TForm1.Edit1KeyDown(Sender: TObject; var Key: Word;
+procedure TForm1.Edit1KeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
  case Key of
@@ -255,10 +250,10 @@ begin
   VK_DIVIDE:begin x:=StrToFloat(Edit1.Text); c:='/'; Edit1.Text:='';  end;
   VK_SUBTRACT:begin x:=StrToFloat(Edit1.Text); c:='-'; Edit1.Text:='';  end;
   VK_RETURN:if Edit1.Text='' then ShowMessage('введите число')
-   else
-    begin
+  else
+   begin
      chistilka;
-     y:=StrToFloat(Edit1.Text);
+    y:=StrToFloat(Edit1.Text);
     case c of
     '/':if y=0 then ShowMessage('на 0 делить нельзя!') else k:=x/y;
     '*':begin k:=x*y;   end;
@@ -267,37 +262,13 @@ begin
     end;
     Edit1.Text:=FloatToStr(k)
    end;
-   VK_DELETE:begin  x:=0; y:=0; Edit1.Text:=''; end;
  end;
 
-end; }
+end;
 
 procedure TForm1.FormCreate(Sender: TObject);
 begin
 i:=0;
 end;
-
-procedure TForm1.FormKeyDown(Sender: TObject; var Key: Word;
-  Shift: TShiftState);
- begin
-  case Key of
-  ord('1'):Button1Click(Sender);
-  ord('2'):Button2Click(Sender);
-  ord('3'):Button3Click(Sender);
-  ord('4'):Button4Click(Sender);
-  ord('5'):Button5Click(Sender);
-  ord('6'):Button6Click(Sender);
-  ord('7'):Button7Click(Sender);
-  ord('8'):Button8Click(Sender);
-  ord('9'):Button9Click(Sender);
-  ord('0'):Button10Click(Sender);
-  VK_ADD: Button14Click(Sender);
-  VK_DIVIDE: Button11Click(Sender);
-  VK_SUBTRACT:Button13Click(Sender);
-  VK_RETURN:Button15Click(Sender);
-  VK_DELETE:Button17Click(Sender);
-  ord('*'):Button12Click(Sender);
-  end;
- end;
 
 end.

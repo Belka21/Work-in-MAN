@@ -1,6 +1,6 @@
 object Form1: TForm1
-  Left = 438
-  Top = 154
+  Left = 319
+  Top = 132
   Width = 870
   Height = 640
   Caption = 'Form1'
@@ -10,11 +10,8 @@ object Form1: TForm1
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   Font.Style = []
-  KeyPreview = True
-  Menu = MainMenu1
   OldCreateOrder = False
   OnCreate = FormCreate
-  OnKeyDown = FormKeyDown
   PixelsPerInch = 96
   TextHeight = 13
   object Edit1: TEdit
@@ -22,8 +19,8 @@ object Form1: TForm1
     Top = 96
     Width = 193
     Height = 21
-    ReadOnly = True
     TabOrder = 0
+    OnKeyDown = Edit1KeyDown
   end
   object Button1: TButton
     Left = 160
@@ -324,13 +321,5 @@ object Form1: TForm1
     ParentFont = False
     TabOrder = 20
     OnClick = Button20Click
-  end
-  object MainMenu1: TMainMenu
-    object N1: TMenuItem
-      Caption = #1080#1085#1092#1086#1088#1084#1072#1094#1080#1103
-      object N2: TMenuItem
-        Caption = ' '
-      end
-    end
   end
 end
